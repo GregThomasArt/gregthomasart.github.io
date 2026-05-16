@@ -8,15 +8,32 @@
 body {
     margin: 0;
     background-color: #f2f2f2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-family: Arial, sans-serif;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#topbar {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+}
+
+a.button {
+    text-decoration: none;
+    background: #333;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 14px;
 }
 
 img {
     max-width: 95vw;
-    max-height: 95vh;
+    max-height: 90vh;
     box-shadow: 0 0 20px rgba(0,0,0,0.2);
 }
 </style>
@@ -24,12 +41,54 @@ img {
 
 <body>
 
+<div id="topbar">
+    <a class="button" href="index.html">← Back to Gallery</a>
+</div>
+
 <img id="art">
 
 <script>
+// LIST YOUR IMAGES HERE (order matters)
+const images = [
+    "images/Ariel.jpg"
+    // add more later like:
+    // "images/painting2.jpg",
+    // "images/painting3.jpg"
+];
+
+// get current file from URL
 const params = new URLSearchParams(window.location.search);
-const file = params.get("file");
-document.getElementById("art").src = file;
+let current = params.get("file");
+
+// find index
+let index = images.indexOf(current);
+
+// if not found, default to first image
+if (index === -1) {
+    index = 0;
+    current = images[0];
+}
+
+// display image
+const img = document.getElementById("art");
+img.src = current;
+
+// navigate function
+function goTo(i) {
+    if (i >= 0 && i < images.length) {
+        window.location.href = "view.html?file=" + images[i];
+    }
+}
+
+// keyboard navigation
+document.addEventListener("keydown", function(e) {
+    if (e.key === "ArrowRight") {
+        goTo(index + 1);
+    }
+    if (e.key === "ArrowLeft") {
+        goTo(index - 1);
+    }
+});
 </script>
 
 </body>
