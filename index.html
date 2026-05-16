@@ -1,47 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Greg Thomas Art</title>
-  <style>
-    body {
-      font-family: Georgia, serif;
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 0 20px;
-      line-height: 1.6;
-      background-color: #fafafa;
-      color: #222;
-    }
-    h1, h2 {
-      font-weight: normal;
-    }
-    img {
-      max-width: 100%;
-      height: auto;
-      margin: 20px 0;
-    }
-    .poem {
-      margin: 30px 0;
-      white-space: pre-line;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Greg Thomas Art</title>
+
+<style>
+
+body {
+    margin: 0;
+    padding: 30px;
+    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+    color: #222;
+}
+
+h1 {
+    text-align: center;
+    font-size: 42px;
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+
+h2 {
+    font-size: 28px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.thumbnail {
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.thumbnail img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.thumbnail-title {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #222;
+    text-decoration: none;
+}
+
+.thumbnail a {
+    text-decoration: none;
+}
+
+</style>
+
 </head>
+
 <body>
 
+<h1>Greg Thomas Art</h1>
 
 
-<h1>Artwork</h1>
-  
-<a href="images/ariel.jpg">  
-     <img src="ariel.jpg" alt="Ariel">
-</a>
+<h2>Paintings</h2>
 
-<h2>Poem</h2>
-<div class="poem">
-This is where your poem goes.
-Line breaks are preserved.
+<div class="gallery">
+
+    <div class="thumbnail">
+
+        <a href="images/ariel.jpg" target="_blank">
+
+            <img src="images/ariel.jpg" alt="Ariel">
+
+            <div class="thumbnail-title">
+                Ariel
+            </div>
+
+        </a>
+
+    </div>
+
 </div>
+
+
+<h2>Poems</h2>
+
+
+<h2>Photos</h2>
 
 </body>
 </html>
