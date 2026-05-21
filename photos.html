@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Photos</title>
+
+<style>
+body {
+  margin: 0;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.viewer {
+  text-align: center;
+}
+
+.viewer img {
+  max-width: 90vw;
+  max-height: 85vh;
+  border-radius: 6px;
+}
+
+.nav-hint {
+  color: #aaa;
+  font-family: sans-serif;
+  font-size: 14px;
+  margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="viewer">
+  <img id="photo" src="photos/photo01.jpg" alt="photo">
+  <div class="nav-hint">Use ← → arrow keys</div>
+</div>
+
+<script>
+const photos = [
+  "photos/photo01.jpg",
+  "photos/photo02.jpg",
+  "photos/photo03.jpg",
+  "photos/photo04.jpg",
+  "photos/photo05.jpg",
+  "photos/photo06.jpg",
+  "photos/photo07.jpg",
+  "photos/photo08.jpg",
+  "photos/photo09.jpg",
+  "photos/photo10.jpg",
+  "photos/photo11.jpg",
+  "photos/photo12.jpg",
+  "photos/photo13.jpg",
+  "photos/photo14.jpg",
+  "photos/photo15.jpg",
+  "photos/photo16.jpg",
+  "photos/photo17.jpg",
+  "photos/photo18.jpg",
+  "photos/photo19.jpg",
+  "photos/photo20.jpg",
+  "photos/photo21.jpg",
+  "photos/photo22.jpg",
+  "photos/photo23.jpg",
+  "photos/photo24.jpg",
+  "photos/photo25.jpg",
+  "photos/photo26.jpg"
+];
+
+let index = 0;
+const img = document.getElementById("photo");
+
+function showPhoto(i) {
+  index = (i + photos.length) % photos.length;
+  img.src = photos[index];
+}
+
+document.addEventListener("keydown", function(e) {
+  if (e.key === "ArrowRight") {
+    showPhoto(index + 1);
+  } else if (e.key === "ArrowLeft") {
+    showPhoto(index - 1);
+  }
+});
+</script>
+
+</body>
+</html>
