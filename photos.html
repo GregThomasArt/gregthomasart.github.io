@@ -8,6 +8,8 @@
 body {
   margin: 0;
   background: #111;
+  color: #fff;
+  font-family: sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,19 +18,44 @@ body {
 
 .viewer {
   text-align: center;
+  position: relative;
 }
 
 .viewer img {
   max-width: 90vw;
-  max-height: 85vh;
+  max-height: 80vh;
   border-radius: 6px;
 }
 
-.nav-hint {
-  color: #aaa;
-  font-family: sans-serif;
-  font-size: 14px;
+/* counter */
+.counter {
   margin-top: 10px;
+  color: #ccc;
+  font-size: 14px;
+}
+
+/* arrows */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 40px;
+  color: rgba(255,255,255,0.6);
+  cursor: pointer;
+  user-select: none;
+  padding: 10px;
+}
+
+.arrow:hover {
+  color: white;
+}
+
+.arrow.left {
+  left: -60px;
+}
+
+.arrow.right {
+  right: -60px;
 }
 </style>
 </head>
@@ -36,56 +63,52 @@ body {
 <body>
 
 <div class="viewer">
-  <img id="photo" src="photos/photo01.jpg" alt="photo">
-  <div class="nav-hint">Use ← → arrow keys</div>
+
+  <div class="arrow left" id="prev">&#10094;</div>
+
+  <img id="photo" src="" alt="photo">
+
+  <div class="arrow right" id="next">&#10095;</div>
+
+  <div class="counter" id="counter"></div>
+
 </div>
 
 <script>
-const photos = [
-  "photos/photo01.jpg",
-  "photos/photo02.jpg",
-  "photos/photo03.jpg",
-  "photos/photo04.jpg",
-  "photos/photo05.jpg",
-  "photos/photo06.jpg",
-  "photos/photo07.jpg",
-  "photos/photo08.jpg",
-  "photos/photo09.jpg",
-  "photos/photo10.jpg",
-  "photos/photo11.jpg",
-  "photos/photo12.jpg",
-  "photos/photo13.jpg",
-  "photos/photo14.jpg",
-  "photos/photo15.jpg",
-  "photos/photo16.jpg",
-  "photos/photo17.jpg",
-  "photos/photo18.jpg",
-  "photos/photo19.jpg",
-  "photos/photo20.jpg",
-  "photos/photo21.jpg",
-  "photos/photo22.jpg",
-  "photos/photo23.jpg",
-  "photos/photo24.jpg",
-  "photos/photo25.jpg",
-  "photos/photo26.jpg"
-];
-
+let photos = [];
 let index = 0;
+
 const img = document.getElementById("photo");
+const counter = document.getElementById("counter");
+
+async function loadPhotos() {
+  const res = await fetch("photos/index.json");
+  const files = await res.json();
+
+  // convert to full paths
+  photos = files.map(f => "photos/" + f);
+
+  showPhoto(0);
+}
 
 function showPhoto(i) {
   index = (i + photos.length) % photos.length;
   img.src = photos[index];
+
+  counter.textContent = `Photo ${index + 1} of ${photos.length}`;
 }
 
-document.addEventListener("keydown", function(e) {
-  if (e.key === "ArrowRight") {
-    showPhoto(index + 1);
-  } else if (e.key === "ArrowLeft") {
-    showPhoto(index - 1);
-  }
+document.getElementById("next").onclick = () => showPhoto(index + 1);
+document.getElementById("prev").onclick = () => showPhoto(index - 1);
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowRight") showPhoto(index + 1);
+  if (e.key === "ArrowLeft") showPhoto(index - 1);
 });
+
+loadPhotos();
 </script>
 
 </body>
 </html>
+
